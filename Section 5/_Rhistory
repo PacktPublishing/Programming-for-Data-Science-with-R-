@@ -1,0 +1,512 @@
+mad = mad(x),
+IQR=  IQR(x))
+}
+lapply( df , summary )
+sapply( df , summary )
+data(mtcars)
+head(mtcars)
+sapply( mtcars , summary)
+"["(A , 1,1 )
+A <- matrix(rnorm(25) , nrow = 5 , ncol = 5)
+B <- matrix(runif(25) , nrow = 5 , ncol = 5)
+C <- matrix(rnorm(25  , mean = 80 , sd = 20) , nrow = 5 , ncol = 5)
+"["(A , 1,1 )
+A <- matrix(rnorm(25) , nrow = 5 , ncol = 5)
+B <- matrix(runif(25) , nrow = 5 , ncol = 5)
+C <- matrix(rnorm(25  , mean = 80 , sd = 20) , nrow = 5 , ncol = 5)
+A
+C
+My_list <-list ( A, B , C)
+My_list
+A[1,1]
+"["(A , 1 , 1 )
+lapply( My_list , "["  , 1 , 1 )
+lapply( My_list , "["  , 1 ,  )
+lapply( My_list , "["  ,  , 2 )
+library(hflights)
+library(tidy)
+library(dplyr)
+install.packages("hflights")
+install.packages("tidy")
+install.packages("dplyr")
+library(hflights)
+library(dplyr)
+# Converting into local dataframe
+flights <- tbl_df(hflights)
+flights
+View(head(flights))
+flights %>%
+group_by(Dest)  %>%
+summarise(mean(ArrDelay))
+flights %>%
+group_by(Dest)  %>%
+summarise(mean(ArrDelay , na.rm=T ))
+x <- flights %>%
+group_by(Dest)  %>%
+summarise(mean(ArrDelay , na.rm=T ))
+x
+flights %>%
+group_by(Dest)  %>%
+summarise( Mean_AD= mean(ArrDelay , na.rm=T )
+Mean_DD = mean(Dep_Delay , na.rm= T ))
+flights %>%
+group_by(Dest)  %>%
+summarise( Mean_AD= mean(ArrDelay , na.rm=T ),
+Mean_DD = mean(Dep_Delay , na.rm= T ))
+flights %>%
+group_by(Dest)  %>%
+summarise( Mean_AD= mean(ArrDelay , na.rm=T ),
+Mean_DD = mean(DepDelay , na.rm= T ))
+flights %>%
+group_by(Dest)  %>%
+summarise( Mean_AD= mean(ArrDelay , na.rm=T ),
+Mean_DD = mean(DepDelay , na.rm= T )) %>%
+arrange(desc(Mean_DD))
+flights %>%
+group_by(Dest)  %>%
+summarise( Mean_AD= mean(ArrDelay , na.rm=T ),
+Mean_DD = mean(DepDelay , na.rm= T )) %>%
+arrange(desc(Mean_DD)) %>%
+top_n(10)
+?dense_rank()
+flights %>%
+group_by(Dest)  %>%
+summarise( Mean_AD= mean(ArrDelay , na.rm=T ),
+Mean_DD = mean(DepDelay , na.rm= T )) %>%
+arrange(desc(Mean_DD)) %>%
+dense_rank(Mean_DD)
+flights %>%
+group_by(Dest)  %>%
+summarise( Mean_AD= mean(ArrDelay , na.rm=T ),
+Mean_DD = mean(DepDelay , na.rm= T )) %>%
+arrange(desc(Mean_DD)) %>%
+dense_rank()
+dplyr::
+x <- c(5, 1, 3, 2, 2, NA)
+row_number(x)
+min_rank(x)
+dense_rank(x)
+percent_rank(x)
+cume_dist(x)
+dplyr::
+x <- c(5, 1, 3, 2, 2, NA , 1:10 )
+ntile(x, 2)
+desc(ntile(x, 2))
+flights %>%  mutate( dense_rank(DepDelay))
+View(flights %>%  mutate( ntile(DepDelay , 10))
+View(flights %>%  mutate( ntile(DepDelay , 10))
+)?dense_rank()
+View(flights %>%  mutate( ntile(DepDelay , 10)))
+?arrange
+dplyr::
+?arrange_all
+?as.tibble
+l <- list(x = 1:500, y = runif(500), z = 500:1)
+as_tibble(l)
+if (requireNamespace("microbenchmark", quiet = TRUE)) {
+l2 <- replicate(26, sample(letters), simplify = FALSE)
+names(l2) <- letters
+microbenchmark::microbenchmark(
+as_tibble(l2, validate = FALSE),
+as_tibble(l2),
+as.data.frame(l2)
+)
+}
+if (requireNamespace("microbenchmark", quiet = TRUE)) {
+m <- matrix(runif(26 * 100), ncol = 26)
+colnames(m) <- letters
+microbenchmark::microbenchmark(
+as_tibble(m),
+as.data.frame(m)
+)
+}
+df <- as_tibble(l)
+if (requireNamespace("microbenchmark", quiet = TRUE)) {
+l2 <- replicate(26, sample(letters), simplify = FALSE)
+names(l2) <- letters
+microbenchmark::microbenchmark(
+as_tibble(l2, validate = FALSE),
+as_tibble(l2),
+as.data.frame(l2)
+)
+}
+if (requireNamespace("microbenchmark")) {
+l2 <- replicate(26, sample(letters), simplify = FALSE)
+names(l2) <- letters
+microbenchmark::microbenchmark(
+as_tibble(l2, validate = FALSE),
+as_tibble(l2),
+as.data.frame(l2)
+)
+}
+install.packages("microbenchmark")
+if (requireNamespace("microbenchmark") ) {
+l2 <- replicate(26, sample(letters), simplify = FALSE)
+names(l2) <- letters
+microbenchmark::microbenchmark(
+as_tibble(l2, validate = FALSE),
+as_tibble(l2),
+as.data.frame(l2)
+)
+}
+flights %>%  group_by(UniqueCarrier)
+?summarise_each
+flights %>%  group_by(UniqueCarrier) %>%
+summarise_all( mean(x , na.rm=T)  , Cancelled , Diverted )
+flights %>%  group_by(UniqueCarrier) %>%
+summarise_all( mean( , na.rm=T)  , Cancelled , Diverted )
+flights %>%  group_by(UniqueCarrier) %>%
+summarise_all( funs(mean( , na.rm=T) )   , Cancelled , Diverted )
+flights %>%  group_by(UniqueCarrier) %>%
+summarise_all( funs(mean( ., na.rm=T) )   , Cancelled , Diverted )
+flights %>%
+group_by(UniqueCarrier) %>%
+summarise_each(  funs(  mean , min(. , na.rm=T) , max(. , na.rm=T )    ), Cancelled, Diverted   )
+summarise_all( funs( "Cancelled" , mean )
+flights %>%  group_by(UniqueCarrier) %>%
+summarise_all( funs( "Cancelled" , mean ))
+flights %>%
+group_by(UniqueCarrier) %>%
+summarise_each(  funs(  mean , min(. , na.rm=T) , max(. , na.rm=T )    ), Cancelled, Diverted   )
+flights %>%  group_by(UniqueCarrier) %>%
+summarise_all( funs( "Cancelled" , mean ))
+flights %>%  group_by(UniqueCarrier) %>%
+summarise_all(  "Cancelled" , mean )
+?summarise_each
+flights %>%  group_by(UniqueCarrier) %>%
+summarise_all(mean)
+?.tbl
+flights %>% group_by(UniqueCarrier) %>%
+summarise( mean(ArrDelay))
+flights %>% group_by(UniqueCarrier) %>%
+summarise_all( mean(. , na.rm=T))
+flights %>% group_by(UniqueCarrier) %>%
+summarise_all( mean , na.rm=T)
+flights %>% group_by(UniqueCarrier) %>%
+summarise_at(c("Cancelled" , "Diverted")  , mean)
+flights %>% group_by(UniqueCarrier) %>%
+summarise_at(c("Cancelled" , "Diverted")  , mean(. , na.rm = T))
+flights %>% group_by(UniqueCarrier) %>%
+summarise_at(c("Cancelled" , "Diverted")  ,
+funs(mean(. , na.rm = T)))
+flights %>% group_by(UniqueCarrier) %>%
+summarise_at(c("Cancelled" , "Diverted")  ,
+funs(Mean= mean(. , na.rm = T)))
+flights %>% group_by(UniqueCarrier) %>%
+summarise_at(c("Cancelled" , "Diverted")  ,
+funs(Mean= mean(. , na.rm = T)) ,
+Median = median(. , na.rm=T))
+View(head(flights))
+flights %>% group_by(UniqueCarrier) %>%
+summarise_at(c("Cancelled" , "Diverted")  ,
+funs(Mean= mean(. , na.rm = T)) ,
+Median = median)
+flights %>% group_by(UniqueCarrier) %>%
+summarise_at(c("Cancelled" , "Diverted")  ,
+funs(Mean= mean(. , na.rm = T) ,
+Median = median))
+flights %>% group_by(UniqueCarrier) %>%
+summarise_at(c("Cancelled" , "Diverted")  ,
+funs(Mean= mean(. , na.rm = T) ,
+Median = median(. , na.rm=T)))
+flights %>%
+group_by(UniqueCarrier) %>%
+summarise_all(  mean   )
+flights %>%
+group_by(UniqueCarrier) %>%
+summarise_all(  mean , na.rm= T   )
+flights %>%
+group_by(UniqueCarrier) %>%
+summarise_all(  mean , median , na.rm= T   )
+flights %>%
+group_by(UniqueCarrier) %>%
+summarise_all(funs(  mean , median ) )
+flights %>%
+group_by(UniqueCarrier) %>%
+summarise_all( funs(  mean  ) )
+flights %>%
+group_by(UniqueCarrier) %>%
+summarise_all( funs(  mean , min  ) )
+flights %>%
+group_by(UniqueCarrier) %>%
+summarise_at( "Cancelled" ,  funs(  mean , min  ) )
+flights %>%
+group_by(UniqueCarrier) %>%
+summarise_at( c("Cancelled" ,"Diverted") ,  funs(  mean , min  ) )
+flights %>%
+group_by(UniqueCarrier) %>%
+summarise_if( is.numeric,  funs(  mean , min  ) )
+str(flights)
+flights %>%
+group_by(UniqueCarrier) %>%
+summarise_if( is.numeric,  funs(  n_distinct() , min  ) )
+flights %>%
+group_by(UniqueCarrier) %>%
+summarise_if( is.character ,  funs(  n_distinct , min  ) )
+flights %>%
+group_by(UniqueCarrier) %>%
+summarise_if( is.character ,  funs(  n_distinct  ) )
+str(flights)
+flights %>%
+group_by(UniqueCarrier) %>%
+summarise_if( is.character ,  funs(  n_distinct  ) )
+flights %>%
+group_by(UniqueCarrier) %>%
+summarise_if( is.character ,  funs(  n  ) )
+flights %>%
+group_by(UniqueCarrier) %>%
+summarise_if( is.character ,  funs(  n_groups()  ) )
+flights %>%
+flights %>%
+group_by(UniqueCarrier) %>%
+summarise_at( vars(contains("Delay") ,  funs(  mean , min  ) )
+flights %>%
+group_by(UniqueCarrier) %>%
+summarise_at( vars(contains("Delay")),  funs(  mean , min  ) )
+flights %>%
+group_by(UniqueCarrier) %>%
+summarise_at( c("Cancelled" ,"Diverted") ,  funs(Mean= mean(. , na.rm = T) ,
+Median = median(. , na.rm=T)) )
+flights %>%
+group_by(UniqueCarrier) %>%
+summarise_at(vars(contains("Delay") ,  funs(
+Mean = mean(. , na.rm = T) ,
+Median = median(. , na.rm =
+T)
+))
+flights %>%
+group_by(UniqueCarrier) %>%
+summarise_at(vars(contains("Delay")),  funs(Mean = mean(. , na.rm = T) ,
+Median = median(. , na.rm =
+T)))
+flights %>%
+group_by(UniqueCarrier) %>%
+summarise_at( vars(contains("Delay")) ,  funs(Mean= mean(. , na.rm = T) ,
+Median = median(. , na.rm=T)) )
+flights %>%
+group_by(Dest) %>%
+select(Cancelled) %>%
+table()
+flights %>%
+group_by(Dest) %>%
+select(Cancelled)
+flights %>%
+group_by(Dest) %>%
+select(Cancelled) %>%
+table()
+library(hflights)
+library(dplyr)
+flights <- tbl_df(hflights)
+View(head(flights))
+flights %>% group_by(Dest) %>%
+summarise( mean(ArrDelay))
+flights %>% group_by(Dest) %>%
+summarise( mean(ArrDelay , na.rm-=T))
+flights %>% group_by(Dest) %>%
+summarise( mean(ArrDelay , na.rm=T))
+flights %>%  group_by(UniqueCarrier) %>% summarise_all(mean)
+flights %>%  group_by(UniqueCarrier) %>% summarise_at("Cancelled"  , mean)
+flights %>%  group_by(UniqueCarrier) %>% summarise_at(c("Cancelled", "Diverted") , mean)
+flights %>%  group_by(UniqueCarrier) %>% summarise_if(is.integer , mean)
+flights %>%
+group_by(UniqueCarrier) %>%
+summarise_if( is.integer ,  funs(mean , min, max) )
+library(hflights)
+library(dplyr)
+# Converting into local dataframe
+flights <- tbl_df(hflights)
+View(head(flights))
+flights %>% group_by(Dest) %>% summarise(mean(ArrDelay))
+flights %>% group_by(Dest) %>% summarise(mean(ArrDelay , na.rm=T ))
+flights %>% group_by(Dest) %>% summarise_all(mean)
+flights %>% group_by(Dest) %>% summarise_all(mean ,  na.rm=T )
+flights %>% group_by(Dest) %>% summarise_at("Cancelled" ,  mean  )
+flights %>% group_by(Dest) %>% summarise_at(c("Cancelled" , "Diverted") ,  mean  )
+flights %>% group_by(Dest) %>% summarise_if(is.numeric ,  mean  )
+?funs
+flights %>% group_by(Dest) %>%
+summarise_if(is.numeric ,  funs( mean( . , na.rm=T)   , min , max )  )
+authors <- data.frame(
+surname = I(c("Tukey", "Venables", "Tierney", "Ripley", "McNeil")),
+nationality = c("US", "Australia", "US", "UK", "Australia"),
+deceased = c("yes", rep("no", 4)))
+# Dataset 2:
+books <- data.frame(
+name = I(c("Tukey", "Venables", "Tierney",
+"Ripley", "Ripley", "McNeil", "R Core")),
+title = c("Exploratory Data Analysis",
+"Modern Applied Statistics ...",
+"LISP-STAT",
+"Spatial Statistics", "Stochastic Simulation",
+"Interactive Data Analysis",
+"An Introduction to R"),
+other.author = c(NA, "Ripley", NA, NA, NA, NA,
+"Venables & Smith"))
+(m1 <- merge(authors, books, by.x = "surname", by.y = "name"))
+(m2 <- merge(books, authors, by.x = "name", by.y = "surname"))
+stopifnot(as.character(m1[, 1]) == as.character(m2[, 1]),
+all.equal(m1[, -1], m2[, -1][ names(m1)[-1] ]),
+dim(merge(m1, m2, by = integer(0))) == c(36, 10))
+## "R core" is missing from authors and appears only here :
+merge(authors, books, by.x = "surname", by.y = "name", all = TRUE)
+## example of using 'incomparables'
+x <- data.frame(k1 = c(NA,NA,3,4,5), k2 = c(1,NA,NA,4,5), data = 1:5)
+x
+y <- data.frame(k1 = c(NA,2,NA,4,5), k2 = c(NA,NA,3,4,5), data = 1:5)
+merge(x, y, by = c("k1","k2")) # NA's match
+y
+dplyr::left_join()
+?dplyr::left_join()
+band_members %>% inner_join(band_instruments)
+band_members
+band_members
+band_instruments
+band_members %>% inner_join(band_instruments , by=c("name"="name"))
+# Dataset 1:
+authors <- data.frame(
+name = I(c("Tukey", "Venables", "Tierney", "Ripley", "McNeil")),
+nationality = c("US", "Australia", "US", "UK", "Australia"),
+deceased = c("yes", rep("no", 4)))
+books <- data.frame(
+name = I(c("Tukey", "Venables", "Tierney",
+"Ripley", "Ripley", "McNeil", "R Core")),
+title = c("Exploratory Data Analysis",
+"Modern Applied Statistics ...",
+"LISP-STAT",
+"Spatial Statistics", "Stochastic Simulation",
+"Interactive Data Analysis",
+"An Introduction to R"),
+other.author = c(NA, "Ripley", NA, NA, NA, NA,
+"Venables & Smith"))
+books
+authors
+merge( books , authors , by="name" )
+merge( books , authors , by="name" )
+merge( books , authors , by="name" , all= T   )
+# Dataset 1:
+authors <- data.frame(
+name = I(c("Tukey", "Venables", "Tierney", "Ripley", "McNeil")),
+nationality = c("US", "Australia", "US", "UK", "Australia"),
+deceased = c("yes", rep("no", 4)))
+books <- data.frame(
+name = I(c("Tukey", "Venables", "Tierney",
+"Ripley", "Ripley", "McNeil", "R Core")),
+title = c("Exploratory Data Analysis",
+"Modern Applied Statistics ...",
+"LISP-STAT",
+"Spatial Statistics", "Stochastic Simulation",
+"Interactive Data Analysis",
+"An Introduction to R"),
+other.author = c(NA, "Ripley", NA, NA, NA, NA,
+"Venables & Smith"))
+books
+authors
+merge( books , author , by="name")
+merge( books , authors , by="name")
+merge( books , authors , by="name" , all=T)
+books <- data.frame(
+author_name = I(c("Tukey", "Venables", "Tierney",
+"Ripley", "Ripley", "McNeil", "R Core")),
+title = c("Exploratory Data Analysis",
+"Modern Applied Statistics ...",
+"LISP-STAT",
+"Spatial Statistics", "Stochastic Simulation",
+"Interactive Data Analysis",
+"An Introduction to R"),
+other.author = c(NA, "Ripley", NA, NA, NA, NA,
+"Venables & Smith"))
+books
+merge( books , authors , by.x="author_name" , by.y="name" , all.y=T)
+?is.na
+data(iris)
+head(iris)
+lapply( iris , function(x) sum(is.na(x))
+lapply( iris , function(x) sum(is.na(x)) )
+sapply( iris , function(x) sum(is.na(x)) )
+summary(iris)
+iris.mis <- prodNA(iris, noNA = 0.1)
+prodNA(iris, noNA = 0.1)
+?prodNA
+library(MICE)
+install.packages("MICE")
+install.packages("mice")
+library(mice)
+iris.mis <- prodNA(iris, noNA = 0.1)
+install.packages("mi")
+library(mi)
+?mi::.__C__pooled
+??mi::.__C__pooled
+install.packages("missForest")
+library(missForest)
+iris.mis <- prodNA(iris, noNA = 0.1)
+sapply( iris.mis , function(x) sum(is.na(x)) )
+md.pattern(iris.mis)
+install.packages("VIM")
+library(VIM)
+?mice
+library(reshape2)
+?reshape
+summary(Indometh)
+head(Indometh)
+?Indometh
+datasets
+datasets()
+Indometh
+?cast
+?dcast
+names(airquality) <- tolower(names(airquality))
+airquality
+melt(airquality, id=c("month", "day"), na.rm=TRUE)
+aqm <- melt(airquality, id=c("month", "day"), na.rm=TRUE)
+head(airquality)
+head(airquality) ; dim(airquality)
+head(aqm) ; dim(aqm)
+cars1 <- cars[1:30, ]  # original data
+cars_outliers <- data.frame(speed=c(19,19,20,20,20), dist=c(190, 186, 210, 220, 218))  # introduce outliers.
+cars2 <- rbind(cars1, cars_outliers)  # data with outliers.
+par(mfrow=c(1, 2))
+plot(cars2$speed, cars2$dist, xlim=c(0, 28), ylim=c(0, 230), main="With Outliers", xlab="speed", ylab="dist", pch="*", col="red", cex=2)
+abline(lm(dist ~ speed, data=cars2), col="blue", lwd=3, lty=2)
+url <- "http://rstatistics.net/wp-content/uploads/2015/09/ozone.csv"
+outlier_values <- boxplot.stats(inputData$pressure_height)$out  # outlier values.
+boxplot(inputData$pressure_height, main="Pressure Height", boxwex=0.1)
+mtext(paste("Outliers: ", paste(outlier_values, collapse=", ")), cex=0.6)
+inputData <- read.csv(url)  # import data
+outlier_values <- boxplot.stats(inputData$pressure_height)$out  # outlier values.
+boxplot(inputData$pressure_height, main="Pressure Height", boxwex=0.1)
+mtext(paste("Outliers: ", paste(outlier_values, collapse=", ")), cex=0.6)
+url <- "http://rstatistics.net/wp-content/uploads/2015/09/ozone.csv"
+ozone <- read.csv(url)
+# For categorical variable
+boxplot(ozone_reading ~ Month, data=ozone, main="Ozone reading across months")  # clear pattern is noticeable.
+boxplot(ozone_reading ~ Day_of_week, data=ozone, main="Ozone reading for days of week")  # this may not be significant, as day of week variable is a subset of the month var.
+names(Smarket)
+glm.fits=glm(Direction~Lag1+Lag2+Lag3+Lag4+Lag5+Volume,data=Smarket,family=binomial)
+library(ISLR)
+names(Smarket)
+dim(Smarket)
+summary(Smarket)
+pairs(Smarket)
+cor(Smarket)
+cor(Smarket[,-9])
+attach(Smarket)
+plot(Volume)
+data("Titanic")
+training.data.raw <- Titanic
+sapply(training.data.raw,function(x) sum(is.na(x)))
+sapply(training.data.raw, function(x) length(unique(x)))
+head(Titanic)
+View(Titanic)
+lapply(training.data.raw, function(x) length(unique(x)))
+training.data.raw <- data.frame(Titanic)
+sapply(training.data.raw,function(x) sum(is.na(x)))
+sapply(training.data.raw, function(x) length(unique(x)))
+getwd()
+training.data.raw <- read.csv('train.csv',header=T,na.strings=c(""))
+training.data.raw <- read.csv('Titanic.csv',header=T,na.strings=c(""))
+setwd("C:/Users/lenovo/Google Drive/2. Data Science/8. Packt/1. Programming for Data Science with R/Section 5 - Various techniques to boost your model/Code")
+training.data.raw <- read.csv('Titanic.csv',header=T,na.strings=c(""))
+sapply(training.data.raw,function(x) sum(is.na(x)))
+sapply(training.data.raw, function(x) length(unique(x)))
+data <- subset(training.data.raw,select=c(2,3,5,6,7,8,10,12))
+data$Age[is.na(data$Age)] <- mean(data$Age,na.rm=T)

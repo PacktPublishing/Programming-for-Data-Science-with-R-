@@ -1,0 +1,94 @@
+
+
+# Motivation: 
+
+# Create a simple data ( 6 x 6 )
+x = matrix(sample(c(1:10, -999), 36, rep = TRUE), nrow=6 )
+df <- data.frame(x )
+names(df) <- letters[1:6]
+df
+
+
+#We want to replace the -999 with NA's
+df$a[df$a == -999] <- NA
+df$b[df$b == -999] <- NA
+df$c[df$c == -989] <- NA
+df$d[df$d == -999] <- NA
+df$e[df$e == -999] <- NA
+df$f[df$g == -999] <- NA
+
+
+# A better method! ( But still not the best method)
+
+fix_missing <- function(x) {
+  x[x == -999] <- NA
+  x
+}
+
+df$a <- fix_missing(df$a)
+df$b <- fix_missing(df$b)
+df$c <- fix_missing(df$c)
+df$d <- fix_missing(df$d)
+df$e <- fix_missing(df$e)
+df$f <- fix_missing(df$e)
+
+
+
+# Example: Efficient way!
+
+
+fix_missing <- function(x) {
+  x[x == -99] <- NA
+  x
+}
+
+df[] <- lapply(df, fix_missing)
+
+#**********************************
+#*** Building Blocks of FP ********
+#**********************************
+
+
+## 1. Anonymous Functions:
+
+
+
+# Our Anonymous Function:
+
+formals(function(x = 4) g(x) + h(x))
+body(function(x = 4) g(x) + h(x))
+environment(function(x = 4) g(x) + h(x))
+
+
+
+power <- function(exponent) {
+  function(x) {
+    x ^ exponent
+  }
+}
+
+
+## 2. Closure:
+
+power <- function(exponent) {
+  function(x) {
+    x ^ exponent
+  }
+}
+
+#We can generate the child functions from the above parent function.
+square <- power(2)
+cube <- power(3)
+
+
+
+## 3. List of functions:
+
+
+funs2 <- list(
+  sum = function(x, ...) sum(x, ..., na.rm = TRUE),
+  mean = function(x, ...) mean(x, ..., na.rm = TRUE),
+  median = function(x, ...) median(x, ..., na.rm = TRUE)
+)
+
+lapply(funs2, function(f) f(x))
